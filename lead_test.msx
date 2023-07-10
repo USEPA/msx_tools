@@ -1,0 +1,43 @@
+[TITLE]
+MSX Builder - Python Generated File
+
+[OPTIONS]
+  AREA_UNITS M2 			;Surface concentration is mass/m2
+  RATE_UNITS SEC 			;Reaction rates are concen/sec
+  SOLVER     RK5 			;5-th order Runge-Kutta integrator
+  TIMESTEP   1 			;seconds
+  COUPLING   NONE 			;Default NONE (???)
+  RTOL       1e-08 			;Relative concentration tolerance
+  ATOL       1e-08 			;Absolute concentration tolerance
+  SEGMENTS   5000 			;Max # of segments per pipe: Default value is 5000
+  PECLET     1000.0 			;default value is 1000 for Peclet Threshold for applying dispersion
+
+[SPECIES]
+  BULK PB2        UG			;Dissolved Lead (Pb)
+
+[COEFFICIENTS]
+  CONSTANT M          0.12			;Desorption Rate (ug/m^2/s)
+  CONSTANT E          140.0			;Saturation/Plumbosolvency Level (ug/L)
+  PARAMETER F          0.0			;Determines which pipes have reactions
+
+[TERMS]
+
+[PIPES]
+  RATE	PB2		F*Av*M*(E - PB2)/E			;
+
+[TANKS]
+  RATE	PB2		0			;
+
+[SOURCES]
+
+[DIFFUSIVITY]
+  PB2	1.0					;
+
+[PARAMETERS]
+  PIPE	1				F			1.0			;Sets Desorption from Lead Pipe
+
+[QUALITY]
+
+[PATTERNS]
+
+[REPORT]

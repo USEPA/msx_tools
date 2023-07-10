@@ -1,0 +1,91 @@
+[TITLE]
+Arsenic Injection Simulation
+
+[OPTIONS]
+  AREA_UNITS M2              ;Surface concentration is mass/m2
+  RATE_UNITS MIN             ;Reaction rates are concen/sec
+  SOLVER     RK5             ;5-th order Runge-Kutta integrator
+  TIMESTEP   60              ;300 sec (5 min) solution time step
+  RTOL       0.0001           ;Relative concentration tolerance
+  ATOL       0.0001           ;Absolute concentration tolerance
+
+
+[SPECIES]
+  BULK ASb   MG             ;Bulk Arsenate Species
+  BULK ASw   MG             ;Wall (adsorbed) Arsenate Species  
+
+[COEFFICIENTS]
+  CONSTANT K1     0.2		;Adsorption rate
+  CONSTANT K2	0.00001	;Desorption rate
+  CONSTANT rh	0.25		  ;Hydraulic radius
+
+[TERMS]
+
+[PIPES]
+  ;Arsenic reactions in pipes
+  RATE    ASb   - K1*ASb + K2*ASw
+  RATE    ASw    rh*K1*ASb - rh*K2*ASw
+
+[TANKS]
+
+
+[SOURCES]
+  ; Sources of chlorine, fixed concentration of 1 mg/L at river and lake sources 
+  ; and models booster stations at each of the three tanks
+  
+  ; Source for Arsenic
+  ; This is commented out here because it is specified in tsg file for tevasim runs
+  ; Uncomment below line in order to run this file in epanet-msx
+   MASS  105  ASb    8.33E6		1
+
+
+
+[QUALITY]
+;  Initial conditions (= 0 if not specified here)
+  GLOBAL   ASb	0 ;Assume initial concentrations are 0
+  GLOBAL	ASw	0;
+
+[PATTERNS]
+  ;Set up pattern for injection 
+  ; Total duration: 7 days (= 168 hours).
+  ; Below is really only needed for epanetmsx run (not tevasim) but will be ignored by tevasim.
+
+   1     1.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+ 
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+
+[REPORT]
+NODES   ALL
+SPECIE ASb	YES 5
+SPECIE ASw	YES 5
