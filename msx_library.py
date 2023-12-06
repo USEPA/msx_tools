@@ -140,6 +140,37 @@ msx_lead = {'title': 'MSX Builder - Python Generated File',
               }
 
 
+salt_tracer = {'title': 'MSX Builder - Python Generated File',
+                  'description': 'Conservative, non-reactive, tracer, flushing',
+              'options': {'area_units': {'val': 'M2',   'note': 'Surface concentration is mass/m2'},
+                          'rate_units': {'val': 'MIN',  'note': 'Reaction rates are concen/sec'},
+                          'solver':     {'val': 'RK5',  'note': '5-th order Runge-Kutta integrator'},
+                          'timestep':   {'val': 1,      'note': 'seconds'},
+                          'RTOL':       {'val': 1e-6,  'note': 'Relative concentration tolerance'},
+                          'ATOL':       {'val': 1e-6,  'note': 'Absolute concentration tolerance'},
+                          #'COMPILER':   {'val': 'VC',   'note': ''},
+                          'SEGMENTS':   {'val': 5000,   'note': 'default value is 5000'}},
+              'species': {'Salt':     {'type': 'BULK',        'val': 'MG',    'note': 'Salt Tracer'},
+                          },
+              'coefficients': {
+                  },
+              'pipes': {'Salt':   {'type': 'RATE',        'val': '0',  'note': ''}, 
+                        },
+              'tanks': {'Salt':   {'type': 'RATE',        'val': '0',  'note': ''},
+                        },
+              'terms': {},
+              'sources': [['CONCEN','Source','Salt', 0],
+                          ],
+              'dispersion': {'Salt': {'val': 1.0, 'extra': '', 'note': ''},},  # relative value compared to chlorine
+              'quality': [['GLOBAL', 'Salt', 100]],
+              'patterns': {},
+              'report': [['NODES', 'ALL'],
+                         ['SPECIE','Salt','YES','5'],
+                         ]
+                        
+              }
+
 msx_dict = {'nicotine': msx_nicotine_1,
             'nicotine_ri': msx_nicotine_2,
-            'lead_ppm': msx_lead}
+            'lead_ppm': msx_lead,
+            'salt_tracer': salt_tracer}
